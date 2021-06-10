@@ -13,8 +13,6 @@ services:
     extends:
       service: portainer
       file: portainer/docker-compose.yml
-    ports:
-      - 80:9000
     networks:
       outside:
         ipv4_address: 192.168.0.202
