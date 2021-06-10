@@ -29,3 +29,7 @@ services:
     dns:
       - 127.0.0.1
       - 192.168.0.1
+    ulimits:
+      nofile:
+        soft: 1024
+        hard: 4096
