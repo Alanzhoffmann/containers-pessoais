@@ -1,16 +1,34 @@
-version: '2'
+version: '3'
 
 services:
+  pihole:
+    extends:
+      service: pihole
+      file: pihole/docker-compose.yml
+    networks:
+      outside:
+        ipv4_address: 192.168.0.201
+        ipv6_address: 2804:14C:F287:9060::2
   portainer:
-    image: portainer/portainer-ce:latest
-    command: -H unix:///var/run/docker.sock
-    restart: always
-    ports:
-      - 9000:9000
-      - 8000:8000
-    volumes:
-      - /var/run/docker.sock:/var/run/docker.sock
-      - portainer_data:/data
+    extends:
+      service: portainer
+      file: portainer/docker-compose.yml
+    networks:
+      outside:
+        ipv4_address: 192.168.0.202
 
-volumes:
-  portainer_data:
+networks:
+  outside:
+    enable_ipv6: true
+    driver: ipvlan
+    driver_opts:
+      parent: eth0
+      ipvlan_mode: l2
+    ipam:
+      config:
+        - subnet: 192.168.0.1/24
+          gateway: 192.168.0.1
+          ip_range: 192.168.0.202/30
+        - subnet: 2804:14C:F287:9060::/64
+          gateway: 2804:14C:F287:9060::1
+          ip_range: 2804:14c:f287:9060:0000:0000:0000:0003/80
