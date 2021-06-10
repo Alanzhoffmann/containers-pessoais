@@ -13,4 +13,4 @@ services:
       - portainer_data:/data
 
 volumes:
-  portainer_data: './portainer_data'
+  portainer_data: ./portainer_data
