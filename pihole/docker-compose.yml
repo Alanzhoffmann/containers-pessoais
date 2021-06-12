@@ -10,7 +10,7 @@ services:
       - "53:53/tcp"
       - "53:53/udp"
       - "80:80/tcp"
-      environment:
+    environment:
       TZ: 'America/Sao_Paulo'
       WEBPASSWORD: ''
       ServerIP: 192.168.0.200
@@ -19,7 +19,7 @@ services:
       DNSMASQ_LISTENING: all
     # Volumes store your data between container upgrades
     volumes:
-      - '/home//etc-pihole/:/etc/pihole/'
+      - './etc-pihole/:/etc/pihole/'
       - './etc-dnsmasq.d/:/etc/dnsmasq.d/'
     # Recommended but not required (DHCP needs NET_ADMIN)
     #   https://github.com/pi-hole/docker-pi-hole#note-on-capabilities
