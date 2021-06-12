@@ -4,22 +4,21 @@ version: "3"
 services:
   pihole:
     container_name: pihole
-    image: pihole/pihole:master
+    image: pihole/pihole:latest
     hostname: pihole
     ports:
-      - "443:443/tcp"
       - "53:53/tcp"
       - "53:53/udp"
-      - "67:67/udp"
-      - "80:80/tcp"
     environment:
       TZ: 'America/Sao_Paulo'
       WEBPASSWORD: ''
-      ServerIP: 192.168.0.201
+      ServerIP: 192.168.0.200
       ServerIPv6: 2804:14C:F287:9060::2
+      VIRTUAL_HOST: pi.hole
+      DNSMASQ_LISTENING: all
     # Volumes store your data between container upgrades
     volumes:
-      - './etc-pihole/:/etc/pihole/'
+      - '/home//etc-pihole/:/etc/pihole/'
       - './etc-dnsmasq.d/:/etc/dnsmasq.d/'
     # Recommended but not required (DHCP needs NET_ADMIN)
     #   https://github.com/pi-hole/docker-pi-hole#note-on-capabilities
@@ -29,7 +28,27 @@ services:
     dns:
       - 127.0.0.1
       - 192.168.0.1
+    # Ao setar esses valores lsof não vai usar 100% de cpu e atrapalhar ao abrir o pihole webserver
     ulimits:
       nofile:
         soft: 1024
         hard: 4096
+    depends_on: 
+      - dhcphelper
+    networks: 
+      backend:
+        ipv4_address: '172.31.0.100'
+      
+  dhcphelper:
+    build: ./dhcp-helper
+    restart: unless-stopped
+    network_mode: "host"
+    command: -s 172.31.0.100
+    cap_add: 
+      - NET_ADMIN
+
+networks: 
+  backend:
+    ipam: 
+      config: 
+        - subnet: 172.31.0.0/16
