@@ -24,6 +24,11 @@ services:
     extends: 
       service: samba
       file: samba/docker-compose.yml
+  
+  qbittorrent:
+    extends: 
+      service: qbittorrent
+      file: qbittorrent/docker-compose.yml
 
 networks:
   outside:
