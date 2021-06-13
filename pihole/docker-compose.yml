@@ -19,8 +19,8 @@ services:
       VIRTUAL_HOST: pi.hole
     # Volumes store your data between container upgrades
     volumes:
-      - './etc-pihole/:/etc/pihole/'
-      - './etc-dnsmasq.d/:/etc/dnsmasq.d/'
+      - '${APPDATA_PATH}/pihole/etc/pihole/:/etc/pihole/'
+      - '${APPDATA_PATH}/pihole/etc-dnsmasq.d/:/etc/dnsmasq.d/'
     # Recommended but not required (DHCP needs NET_ADMIN)
     #   https://github.com/pi-hole/docker-pi-hole#note-on-capabilities
     cap_add:
