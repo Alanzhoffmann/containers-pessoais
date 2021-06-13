@@ -8,6 +8,7 @@ services:
     networks:
       outside:
         ipv4_address: ${PIHOLE_IP}
+        ipv6_address: ${PIHOLE_IPV6}
   portainer:
     extends:
       service: portainer
