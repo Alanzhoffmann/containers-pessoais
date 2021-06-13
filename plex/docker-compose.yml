@@ -24,5 +24,5 @@ services:
       - PLEX_CLAIM=${PLEX_CLAIM}
     volumes:
       - ${APPDATA_PATH}/plex/config:/config
-      - ${MEDIA_PATH}/data
+      - ${MEDIA_PATH}:/data
     restart: unless-stopped
