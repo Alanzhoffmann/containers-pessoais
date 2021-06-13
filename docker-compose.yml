@@ -9,6 +9,7 @@ services:
       outside:
         ipv4_address: ${PIHOLE_IP}
         ipv6_address: ${PIHOLE_IPV6}
+
   portainer:
     extends:
       service: portainer
@@ -18,6 +19,11 @@ services:
     extends: 
       service: plex
       file: plex/docker-compose.yml
+      
+  samba:
+    extends: 
+      service: samba
+      file: samba/docker-compose.yml
 
 networks:
   outside:
