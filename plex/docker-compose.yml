@@ -1,8 +1,8 @@
-version: "2.1"
+version: "3"
 
 services:
   plex:
-    image: ghcr.io/linuxserver/plex
+    image: plexinc/pms-docker:latest
     container_name: plex
     ports: 
         - "32400:32400/tcp"
@@ -13,12 +13,13 @@ services:
         - "32414:32414/udp"
         - "32469:32469/tcp"
     environment:
-      - PUID=1000
-      - PGID=1000
-      - VERSION=docker
-      - PLEX_CLAIM= ${PLEX_CLAIM}
+      - TZ=America/Sao_Paulo
+      - HOSTNAME=PlexServer
+      - PLEX_UID=1000
+      - PLEX_GID=1000
+      - ALLOWED_NETWORKS=192.168.1.0/24,172.16.0.0/16
+      - PLEX_CLAIM=${PLEX_CLAIM}
     volumes:
       - ${APPDATA_PATH}/plex/config:/config
-      - ${MEDIA_PATH}/tvseries:/tv
-      - ${MEDIA_PATH}/movies:/movies
+      - ${MEDIA_PATH}/data
     restart: unless-stopped
