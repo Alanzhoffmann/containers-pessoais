@@ -30,6 +30,11 @@ services:
       service: qbittorrent
       file: qbittorrent/docker-compose.yml
 
+  sonarr:
+    extends:
+      service: sonarr
+      file: sonarr/docker-compose.yml
+
 networks:
   outside:
     enable_ipv6: true
