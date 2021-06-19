@@ -2,13 +2,14 @@ version: "3"
 
 services:
   radarr:
-    image: linuxserver/radarr:latest
+    image: ghcr.io/hotio/radarr:latest
     container_name: radarr
     environment:
       - PUID=1000
       - PGID=1000
       - TZ=${TIMEZONE}
     volumes:
+      - /etc/localtime:/etc/localtime:ro
       - ${APPDATA_PATH}/radarr/config:/config
       - ${DATA_PATH}:/data
     ports:
