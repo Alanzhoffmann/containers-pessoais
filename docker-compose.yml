@@ -30,10 +30,16 @@ services:
       service: qbittorrent
       file: qbittorrent/docker-compose.yml
 
-  sonarr:
+  # TODO: mono não inicia, procurar alternativa
+  # sonarr:
+  #   extends:
+  #     service: sonarr
+  #     file: sonarr/docker-compose.yml
+
+  radarr:
     extends:
-      service: sonarr
-      file: sonarr/docker-compose.yml
+      service: radarr
+      file: radarr/docker-compose.yml
 
 networks:
   outside:
