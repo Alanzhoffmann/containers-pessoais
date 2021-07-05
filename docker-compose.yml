@@ -45,6 +45,11 @@ services:
       service: bazarr
       file: bazarr/docker-compose.yml
 
+  ombi:
+    extends: 
+      service: ombi
+      file: ombi/docker-compose.yml
+
   minecraft-vanilla:
     extends:
       service: minecraft-vanilla
