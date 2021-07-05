@@ -2,7 +2,7 @@ version: "3"
 
 services:
   bazarr:
-    image: ghcr.io/hotio/bazarr:latest
+    image: hotio/bazarr:latest
     container_name: bazarr
     environment:
       - PUID=1000
