@@ -40,6 +40,11 @@ services:
       service: radarr
       file: radarr/docker-compose.yml
 
+  bazarr:
+    extends:
+      service: bazarr
+      file: bazarr/docker-compose.yml
+
   minecraft-vanilla:
     extends:
       service: minecraft-vanilla
