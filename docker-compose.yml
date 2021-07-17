@@ -55,6 +55,14 @@ services:
       service: minecraft-vanilla
       file: minecraft-vanilla/docker-compose.yml
 
+  homeassistant:
+    extends: 
+      service: homeassistant
+      file: homeassistant/docker-compose.yml
+    networks: 
+      outside:
+        ipv4_address: ${HOMEASSISTANT_IP}
+
 networks:
   outside:
     enable_ipv6: true
