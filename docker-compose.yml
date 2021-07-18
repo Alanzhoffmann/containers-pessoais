@@ -50,10 +50,10 @@ services:
       service: ombi
       file: ombi/docker-compose.yml
 
-  minecraft-vanilla:
-    extends:
-      service: minecraft-vanilla
-      file: minecraft-vanilla/docker-compose.yml
+  # minecraft-vanilla:
+  #   extends:
+  #     service: minecraft-vanilla
+  #     file: minecraft-vanilla/docker-compose.yml
 
   homeassistant:
     extends: 
