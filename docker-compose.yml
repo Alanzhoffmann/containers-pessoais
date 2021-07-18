@@ -63,6 +63,11 @@ services:
       outside:
         ipv4_address: ${HOMEASSISTANT_IP}
 
+  code-server:
+    extends: 
+      service: code-server
+      file: code-server/docker-compose.yml
+
 networks:
   outside:
     enable_ipv6: true
