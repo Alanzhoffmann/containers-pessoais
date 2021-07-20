@@ -10,6 +10,9 @@ services:
       - TZ=${TIMEZONE}
     volumes:
       - ${APPDATA_PATH}/code-server/config:/config
+      - ${APPDATA_PATH}:/appdata
+      - ${DATA_PATH}/repos:/repos
+      - ../:/repos/containers-pessoais
     ports:
       - 8443:8443
     restart: unless-stopped
