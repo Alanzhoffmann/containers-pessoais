@@ -68,6 +68,14 @@ services:
       service: code-server
       file: code-server/docker-compose.yml
 
+  swag:
+    extends: 
+      service: swag
+      file: swag/docker-compose.yml
+    networks: 
+      outside:
+        ipv4_address: ${PROXY_IP}
+
 networks:
   outside:
     enable_ipv6: true

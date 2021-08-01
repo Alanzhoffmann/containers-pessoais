@@ -1,0 +1,19 @@
+version: "2.1"
+
+services:
+  swag:
+    image: linuxserver/swag
+    container_name: swag
+    cap_add:
+      - NET_ADMIN
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=${TIMEZONE}
+      - URL=${PROXY_URL}
+      - SUBDOMAINS=,
+      - VALIDATION=http
+      - STAGING=true #optional
+    volumes:
+      - ${APPDATA_PATH}/swag/config:/config
+    restart: unless-stopped
