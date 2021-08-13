@@ -75,6 +75,11 @@ services:
     networks: 
       outside:
         ipv4_address: ${PROXY_IP}
+  
+  duckdns:
+    extends: 
+      service: duckdns
+      file: duckdns/docker-compose.yml
 
 networks:
   outside:
