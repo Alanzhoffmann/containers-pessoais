@@ -12,8 +12,8 @@ services:
       - TZ=${TIMEZONE}
       - URL=${PROXY_URL}
       - SUBDOMAINS=,
-      - VALIDATION=http
-      - STAGING=true #optional
+      - VALIDATION=duckdns
+      - DUCKDNSTOKEN=${DUCKDNS_TOKEN}
     volumes:
       - ${APPDATA_PATH}/swag/config:/config
     restart: unless-stopped
