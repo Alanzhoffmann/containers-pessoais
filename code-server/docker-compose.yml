@@ -4,6 +4,7 @@ services:
   code-server:
     image: linuxserver/code-server:latest
     container_name: code-server
+    hostname: code-server
     environment:
       - PUID=1000
       - PGID=1000

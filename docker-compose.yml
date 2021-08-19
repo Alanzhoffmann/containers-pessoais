@@ -14,6 +14,8 @@ services:
     extends:
       service: portainer
       file: portainer/docker-compose.yml
+    networks: 
+      - nginx
 
   plex:
     extends: 
@@ -49,6 +51,8 @@ services:
     extends: 
       service: ombi
       file: ombi/docker-compose.yml
+    networks: 
+      - nginx
 
   # minecraft-vanilla:
   #   extends:
@@ -59,7 +63,7 @@ services:
     extends: 
       service: homeassistant
       file: homeassistant/docker-compose.yml
-    networks: 
+    networks:
       outside:
         ipv4_address: ${HOMEASSISTANT_IP}
 
@@ -67,14 +71,15 @@ services:
     extends: 
       service: code-server
       file: code-server/docker-compose.yml
+    networks: 
+      - nginx
 
   swag:
     extends: 
       service: swag
       file: swag/docker-compose.yml
     networks: 
-      outside:
-        ipv4_address: ${PROXY_IP}
+      - nginx
   
   duckdns:
     extends: 
@@ -82,6 +87,7 @@ services:
       file: duckdns/docker-compose.yml
 
 networks:
+  nginx: {}
   outside:
     enable_ipv6: true
     driver: macvlan

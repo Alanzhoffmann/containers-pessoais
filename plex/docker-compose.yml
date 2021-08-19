@@ -4,7 +4,6 @@ services:
   plex:
     image: linuxserver/plex:latest
     container_name: plex
-    network_mode: bridge
     ports: 
         - "3005:3005/tcp"
         - "32400:32400/tcp"
