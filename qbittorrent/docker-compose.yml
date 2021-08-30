@@ -8,12 +8,12 @@ services:
       - PUID=1000
       - PGID=1000
       - TZ=${TIMEZONE}
-      - WEBUI_PORT=8080
+      - WEBUI_PORT=8081
     volumes:
       - ${APPDATA_PATH}/qbittorrent/config:/config
       - ${DOWNLOAD_PATH}:/downloads
     ports:
       - 6881:6881
       - 6881:6881/udp
-      - 8080:8080
+      - 8081:8081
     restart: unless-stopped

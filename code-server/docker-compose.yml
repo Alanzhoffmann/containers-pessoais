@@ -17,3 +17,14 @@ services:
     ports:
       - 8443:8443
     restart: unless-stopped
+    labels:
+      - "traefik.enable=true"
+        ## HTTP Routers
+      - "traefik.http.routers.codeserver-rtr.entrypoints=https"
+      - "traefik.http.routers.codeserver-rtr.rule=Host(`code-server.$DOMAIN_NAME`)"
+      - "traefik.http.routers.codeserver-rtr.tls=true"
+        ## HTTP Services
+      - "traefik.http.routers.codeserver-rtr.service=codeserver-svc"
+      - "traefik.http.services.codeserver-svc.loadbalancer.server.port=8443"
+        ## Middlewares
+      - "traefik.http.routers.codeserver-rtr.middlewares=chain-oauth@file"

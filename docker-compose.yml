@@ -15,7 +15,7 @@ services:
       service: portainer
       file: portainer/docker-compose.yml
     networks: 
-      - nginx
+      - proxy
 
   plex:
     extends: 
@@ -52,12 +52,7 @@ services:
       service: ombi
       file: ombi/docker-compose.yml
     networks: 
-      - nginx
-
-  # minecraft-vanilla:
-  #   extends:
-  #     service: minecraft-vanilla
-  #     file: minecraft-vanilla/docker-compose.yml
+      - proxy
 
   homeassistant:
     extends: 
@@ -72,22 +67,26 @@ services:
       service: code-server
       file: code-server/docker-compose.yml
     networks: 
-      - nginx
+      - proxy
 
-  swag:
-    extends: 
-      service: swag
-      file: swag/docker-compose.yml
-    networks: 
-      - nginx
-  
   duckdns:
     extends: 
       service: duckdns
       file: duckdns/docker-compose.yml
 
+  traefik:
+    extends:
+      service: traefik
+      file: traefik/docker-compose.yml
+
+  oauth:
+    extends:
+      service: oauth
+      file: oauth/docker-compose.yml
+
+
 networks:
-  nginx: {}
+  proxy: {}
   outside:
     enable_ipv6: true
     driver: macvlan
