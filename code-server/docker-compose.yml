@@ -21,7 +21,7 @@ services:
       - "traefik.enable=true"
         ## HTTP Routers
       - "traefik.http.routers.codeserver-rtr.entrypoints=https"
-      - "traefik.http.routers.codeserver-rtr.rule=Host(`code-server.$DOMAIN_NAME`)"
+      - "traefik.http.routers.codeserver-rtr.rule=HostHeader(`code-server.$DOMAIN_NAME`)"
       - "traefik.http.routers.codeserver-rtr.tls=true"
         ## HTTP Services
       - "traefik.http.routers.codeserver-rtr.service=codeserver-svc"

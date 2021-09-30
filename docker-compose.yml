@@ -78,11 +78,15 @@ services:
     extends:
       service: traefik
       file: traefik/docker-compose.yml
+    networks:
+      - proxy
 
   oauth:
     extends:
       service: oauth
       file: oauth/docker-compose.yml
+    networks:
+      - proxy
 
 
 networks:
