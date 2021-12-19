@@ -16,3 +16,14 @@ services:
     ports:
       - 3579:3579
     restart: unless-stopped
+    labels:
+      - "traefik.enable=true"
+        ## HTTP Routers
+      - "traefik.http.routers.ombi-rtr.entrypoints=https"
+      - "traefik.http.routers.ombi-rtr.rule=HostHeader(`ombi.$DOMAIN_NAME`)"
+      - "traefik.http.routers.ombi-rtr.tls=true"
+        ## HTTP Services
+      - "traefik.http.routers.ombi-rtr.service=ombi-svc"
+      - "traefik.http.services.ombi-svc.loadbalancer.server.port=3579"
+        ## Middlewares
+      - "traefik.http.routers.ombi-rtr.middlewares=chain-oauth@file"

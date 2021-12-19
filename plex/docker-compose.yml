@@ -21,7 +21,19 @@ services:
       - VERSION=latest
       - ALLOWED_NETWORKS=192.168.1.0/24,172.17.0.0/16,172.21.0.0/16
       - PLEX_CLAIM=${PLEX_CLAIM}
+      - ADVERTISE_IP=https://plex.$DOMAIN_NAME:443
     volumes:
       - ${APPDATA_PATH}/plex/config:/config
       - ${MEDIA_PATH}:/data
     restart: unless-stopped
+    labels:
+      - "traefik.enable=true"
+        ## HTTP Routers
+      - "traefik.http.routers.plex-rtr.entrypoints=https"
+      - "traefik.http.routers.plex-rtr.rule=HostHeader(`plex.$DOMAIN_NAME`)"
+      - "traefik.http.routers.plex-rtr.tls=true"
+        ## HTTP Services
+      - "traefik.http.routers.plex-rtr.service=plex-svc"
+      - "traefik.http.services.plex-svc.loadbalancer.server.port=32400"
+        ## Middlewares
+      - "traefik.http.routers.plex-rtr.middlewares=chain-oauth@file"

@@ -14,14 +14,12 @@ services:
     extends:
       service: portainer
       file: portainer/docker-compose.yml
-    networks: 
-      - proxy
 
   plex:
     extends: 
       service: plex
       file: plex/docker-compose.yml
-      
+
   samba:
     extends: 
       service: samba
@@ -51,8 +49,6 @@ services:
     extends: 
       service: ombi
       file: ombi/docker-compose.yml
-    networks: 
-      - proxy
 
   homeassistant:
     extends: 
@@ -66,8 +62,6 @@ services:
     extends: 
       service: code-server
       file: code-server/docker-compose.yml
-    networks: 
-      - proxy
 
   duckdns:
     extends: 
@@ -78,19 +72,18 @@ services:
     extends:
       service: traefik
       file: traefik/docker-compose.yml
-    networks:
-      - proxy
 
   oauth:
     extends:
       service: oauth
       file: oauth/docker-compose.yml
-    networks:
-      - proxy
 
+  prowlarr:
+    extends:
+      service: prowlarr
+      file: prowlarr/docker-compose.yml
 
 networks:
-  proxy: {}
   outside:
     enable_ipv6: true
     driver: macvlan

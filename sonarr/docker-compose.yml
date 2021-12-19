@@ -2,7 +2,7 @@ version: "3"
 
 services:
   sonarr:
-    image: hotio/sonarr:latest
+    image: hotio/sonarr:nightly
     container_name: sonarr
     environment:
       - PUID=1000
@@ -15,3 +15,14 @@ services:
     ports:
       - 8989:8989
     restart: unless-stopped
+    labels:
+      - "traefik.enable=true"
+        ## HTTP Routers
+      - "traefik.http.routers.sonarr-rtr.entrypoints=https"
+      - "traefik.http.routers.sonarr-rtr.rule=HostHeader(`sonarr.$DOMAIN_NAME`)"
+      - "traefik.http.routers.sonarr-rtr.tls=true"
+        ## HTTP Services
+      - "traefik.http.routers.sonarr-rtr.service=sonarr-svc"
+      - "traefik.http.services.sonarr-svc.loadbalancer.server.port=8989"
+        ## Middlewares
+      - "traefik.http.routers.sonarr-rtr.middlewares=chain-oauth@file"
